@@ -1,0 +1,15 @@
+miw_producto:
+    resource: "@MiwDemoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+miw_demo:
+    resource: "@MiwDemoBundle/Resources/config/routing_producto.yml"
+    prefix:   /producto
+
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation
+
+miw_saludo:
+    pattern: /hola
+    defaults: { _controller: AppBundle:Saludo:hola }

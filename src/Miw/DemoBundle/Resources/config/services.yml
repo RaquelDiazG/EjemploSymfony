@@ -1,0 +1,4 @@
+services:
+#    miw_demo.example:
+#        class: Miw\DemoBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
