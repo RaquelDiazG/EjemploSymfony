@@ -1,5 +1,9 @@
+miw_producto:
+    resource: "@MiwDemoBundle/Resources/config/routing_producto.yml"
+    prefix:   /producto
+
 miw_demo_persona:
-    resource: "@MiwDemoBundle/Resources/config/routing/persona.yml"
+    resource: "@MiwDemoBundle/Resources/config/routing_persona.yml"
     prefix:   /persona
 
 miw_demo_homepage:

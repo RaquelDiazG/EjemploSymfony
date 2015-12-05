@@ -1,10 +1,6 @@
-miw_producto:
+miw_demo:
     resource: "@MiwDemoBundle/Resources/config/routing.yml"
     prefix:   /
-
-miw_demo:
-    resource: "@MiwDemoBundle/Resources/config/routing_producto.yml"
-    prefix:   /producto
 
 #app:
 #    resource: "@AppBundle/Controller/"
