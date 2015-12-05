@@ -5,14 +5,21 @@
 {% endblock %}
 
 {% block body %}
+
+    {# total items count #}
+    <div class="count">
+        Total: {{ productos.getTotalItemCount }}
+    </div>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(productos, 'Id', 'p.id') }}</th>
+            <th{% if productos.isSorted('p.nombre') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(productos, 'Nombre', 'p.nombre') }}</th>
+            <th{% if productos.isSorted('p.precio') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(productos, 'Precio', 'p.precio') }}</th>
+            <th{% if productos.isSorted('p.descripcion') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(productos, 'Descripción', 'p.descripcion') }}</th>
         </tr>
+
+        {# table body #}
         {% for producto in productos %}
             <tr>
                 <td><a href="{{path("miw_producto_get",{'id':producto.getId()})}}">{{producto.getId()}}</a></td>
@@ -28,5 +35,8 @@
             </tr>
         {% endfor %}
     </table>
-
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(productos) }}
+    </div>
 {% endblock %}
