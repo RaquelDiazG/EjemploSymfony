@@ -1,3 +1,7 @@
+miw_demo_persona:
+    resource: "@MiwDemoBundle/Resources/config/routing/persona.yml"
+    prefix:   /persona
+
 miw_demo_homepage:
     path:     /hello/{name}
     defaults: { _controller: MiwDemoBundle:Default:index }

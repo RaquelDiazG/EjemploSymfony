@@ -1,0 +1,30 @@
+persona:
+    path:     /
+    defaults: { _controller: "MiwDemoBundle:Persona:index" }
+
+persona_show:
+    path:     /{id}/show
+    defaults: { _controller: "MiwDemoBundle:Persona:show" }
+
+persona_new:
+    path:     /new
+    defaults: { _controller: "MiwDemoBundle:Persona:new" }
+
+persona_create:
+    path:     /create
+    defaults: { _controller: "MiwDemoBundle:Persona:create" }
+    methods:  POST
+
+persona_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MiwDemoBundle:Persona:edit" }
+
+persona_update:
+    path:     /{id}/update
+    defaults: { _controller: "MiwDemoBundle:Persona:update" }
+    methods:  [POST, PUT]
+
+persona_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MiwDemoBundle:Persona:delete" }
+    methods:  [POST, DELETE]
