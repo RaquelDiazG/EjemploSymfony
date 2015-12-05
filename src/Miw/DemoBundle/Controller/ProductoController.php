@@ -5,6 +5,10 @@ namespace Miw\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Miw\DemoBundle\Entity\Producto;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ProductoController extends Controller {
 
@@ -22,12 +26,44 @@ class ProductoController extends Controller {
         return new Response("Id " . $producto->getId());
     }
 
-    public function getAction($id) {
+    /**
+     *
+     * @param type $id Id del producto
+     * @param type $format Formato de la salida
+     * @return Response
+     */
+    public function getAction($id, $format) {
         $producto = $this->getDoctrine()
                 ->getRepository('MiwDemoBundle:Producto')
                 ->find(intval($id));
-//        return new Response($producto);
-        return $this->render("MiwDemoBundle:Producto:producto.html.twig", array("producto" => $producto));
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        if ($format == 'json') {
+            $jsonContent = $serializer->serialize($producto, $format);
+            return new Response($jsonContent);
+        } elseif ($format == 'xml') {
+            $xmlContent = $serializer->serialize($producto, $format);
+            return new Response($xmlContent);
+        } else {
+            return $this->render("MiwDemoBundle:Producto:producto.html.twig", array("producto" => $producto));
+        }
+    }
+
+    public function getAllAction() {
+        $productos = $this->getDoctrine()->getManager()
+                ->getRepository('MiwDemoBundle:Producto')
+                ->findAll();
+        return $this->render("MiwDemoBundle:Producto:productos.html.twig", array("productos" => $productos));
+    }
+
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $producto = $em->getRepository('MiwDemoBundle:Producto')->find($id);
+        $em->remove($producto);
+        $em->flush();
+        return $this->redirectToRoute("miw_producto_getAll");
     }
 
 }

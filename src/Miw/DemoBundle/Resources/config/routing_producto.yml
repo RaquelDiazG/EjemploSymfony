@@ -3,5 +3,14 @@ miw_producto_nuevo:
     defaults: { _controller: MiwDemoBundle:Producto:new }
 
 miw_producto_get:
-    path:     /{id}
-    defaults: { _controller: MiwDemoBundle:Producto:get }
+    path:     /{id}.{format}
+    defaults: { _controller: MiwDemoBundle:Producto:get,format: html }
+
+miw_producto_getAll:
+    path:     /
+    defaults: { _controller: MiwDemoBundle:Producto:getAll,format: html }
+
+miw_producto_delete:
+    path:     /delete/{id}
+    defaults: { _controller: MiwDemoBundle:Producto:delete}
+    methods: [POST]
